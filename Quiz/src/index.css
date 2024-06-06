@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  /* background: radial-gradient(#282727, rgb(35, 34, 34), rgb(0, 0, 0)); */
+  /* background: rgb(31, 29, 45); */
+  /* background: #283044; */
+  background: #2c3e50;
+}
+
+body h1 {
+  font-family: "Reddit Mono", monospace;
+  /* @apply text-gray-100; */
+  color: #ecf0f1;
+}
