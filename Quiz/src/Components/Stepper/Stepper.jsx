@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, message, Steps, theme, ConfigProvider } from "antd";
-import Column from "antd/es/table/Column";
+import "./Stepper.css";
+import { useStepContext } from "../../CustomHooks/StepContext";
 
 export default function Stepper({ steps }) {
   const [current, setCurrent] = useState(0);
-  const next = () => {
-    setCurrent(current + 1);
-  };
-  const prev = () => {
-    setCurrent(current - 1);
-  };
+  const { step } = useStepContext();
+
+  useEffect(() => {
+    setCurrent(step);
+  }, [step]);
+
   //   const items = steps?.map((name, i) => (
   //     <div className="step-item" key={i}>
   //       <div className="step">{i + 1}</div>
@@ -22,11 +23,23 @@ export default function Stepper({ steps }) {
   }));
 
   return (
-    <ConfigProvider theme={{ algorithm: theme }}>
-      <div className="m-5">
-        <Steps current={1} labelPlacement="vertical" items={items} />
-      </div>
-    </ConfigProvider>
+    <div className="m-5 h-auto">
+      <ConfigProvider
+        theme={{
+          token: { colorPrimary: "#45f321", colorText: "#ecf0f1", padding: 0 },
+          components: {
+            Steps: { descriptionMaxWidth: 140 },
+          },
+        }}
+      >
+        <Steps
+          className="custom-steps"
+          current={current}
+          labelPlacement="vertical"
+          items={items}
+        />
+      </ConfigProvider>
+    </div>
   );
 }
 

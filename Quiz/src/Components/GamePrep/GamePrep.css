@@ -1,6 +1,6 @@
 #game-prep-container {
   /* background: rgb(47, 44, 68); */
-  @apply h-[70vh] w-7/12 rounded-lg border;
+  @apply h-4/5 w-2/3 rounded-lg border;
   border-color: #bdc3c7;
   background: #34495e;
 }

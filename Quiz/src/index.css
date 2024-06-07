@@ -15,8 +15,12 @@ body {
   background: #2c3e50;
 }
 
+body {
+  font-family: "Courier New", Courier, monospace;
+  color: #ecf0f1;
+}
+
 body h1 {
   font-family: "Reddit Mono", monospace;
   /* @apply text-gray-100; */
-  color: #ecf0f1;
 }
