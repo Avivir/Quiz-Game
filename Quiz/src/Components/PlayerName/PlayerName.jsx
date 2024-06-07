@@ -1,17 +1,25 @@
-import { Input, Button } from "antd";
+import { Input, Button, Alert } from "antd";
 import { useState } from "react";
 import { useStepContext } from "../../CustomHooks/StepContext.jsx";
 import { useGameINformationContext } from "../../CustomHooks/GameInformation.jsx";
 
 export default function PlayerName() {
   const [name, setName] = useState("");
-  const { step, incrementStep } = useStepContext();
-  const { setNewInformation } = useGameINformationContext();
+  const { incrementStep } = useStepContext();
+  const [error, setError] = useState("");
+  const { setNewInfo } = useGameINformationContext();
 
   const handleSubmit = () => {
-    setNewInformation();
+    if (name.trim().length === 0) {
+      setError("Name is required.");
+    } else if (name.trim().length < 5) {
+      setError("Name must be at least 5 characters long.");
+    } else {
+      setError("");
+      setNewInfo("playerName", name);
+      incrementStep();
+    }
   };
-
   const handleNameChanged = (event) => {
     setName(event.target.value);
   };
@@ -25,12 +33,12 @@ export default function PlayerName() {
           required
           onChange={handleNameChanged}
           size="large"
+          value={name}
         />
-        <Button
-          className="mt-3 self-end"
-          onClick={() => handleSubmit()}
-          type="primary"
-        >
+        {error && (
+          <Alert message={error} type="error" showIcon className="mt-2" />
+        )}
+        <Button className="mt-3 self-end" onClick={handleSubmit} type="primary">
           Next
         </Button>
       </div>

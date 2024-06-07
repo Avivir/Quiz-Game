@@ -27,6 +27,7 @@ import {
   PropertySafetyOutlined,
   SmileOutlined,
 } from "@ant-design/icons";
+import { useGameINformationContext } from "../../CustomHooks/GameInformation";
 
 const icons = {
   SearchOutlined: { component: <SearchOutlined />, name: "general" },
@@ -65,11 +66,22 @@ const icons = {
 };
 
 export default function Categories() {
-  const { incrementStep } = useStepContext();
-  const [selectedButton, setSelectedButton] = useState(null);
+  const { incrementStep, decrementStep } = useStepContext();
+  const [selectedButton, setSelectedButton] = useState(0);
+  const [categoryName, setCategoryName] = useState("general");
+  const { setNewInfo } = useGameINformationContext();
 
-  // Tablica kluczy ikon
   const iconKeys = Object.keys(icons);
+
+  const handleCategoryButtonClick = (number, iconName) => {
+    setSelectedButton(number);
+    setCategoryName(iconName);
+  };
+
+  const handleNextButton = () => {
+    incrementStep();
+    setNewInfo("category", categoryName);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center h-auto">
@@ -83,7 +95,7 @@ export default function Categories() {
               type={isSelected ? "primary" : "default"}
               className="w-20 h-20 flex flex-col items-center justify-center"
               key={i}
-              onClick={() => setSelectedButton(i)}
+              onClick={() => handleCategoryButtonClick(i, iconName)}
             >
               <div className="text-2xl mb-2">{IconComponent}</div>
               <div className="text-xs">{iconName}</div>
@@ -91,8 +103,11 @@ export default function Categories() {
           );
         })}
       </div>
-      <div className="mt-8">
-        <Button type="primary" onClick={() => incrementStep()}>
+      <div className="mt-8 flex w-auto gap-4">
+        <Button type="default" onClick={() => decrementStep()}>
+          Back
+        </Button>
+        <Button type="primary" onClick={() => handleNextButton()}>
           Next
         </Button>
       </div>

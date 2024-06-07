@@ -1,8 +1,17 @@
 import { Button } from "antd";
 import { useState } from "react";
+import { useGameINformationContext } from "../../CustomHooks/GameInformation";
+import { useStepContext } from "../../CustomHooks/StepContext";
 
 export default function DifficultyLevel() {
   const [selectedButton, setSelectedButton] = useState("easy");
+  const { getInformationAsJson, setNewInfo } = useGameINformationContext();
+  const { decrementStep } = useStepContext();
+
+  const startHandle = (selectedButton) => {
+    setNewInfo("difficulty", selectedButton);
+    console.log(getInformationAsJson());
+  };
 
   return (
     <div className="flex h-auto flex-col w-auto justify-center items-center">
@@ -30,8 +39,13 @@ export default function DifficultyLevel() {
             Hard
           </Button>
         </div>
-        <div className="flex justify-end mt-8">
-          <Button type="primary">Start Game</Button>
+        <div className="mt-8 flex justify-center w-auto gap-4">
+          <Button type="default" onClick={() => decrementStep()}>
+            Back
+          </Button>
+          <Button type="primary" onClick={() => startHandle(selectedButton)}>
+            Start
+          </Button>
         </div>
       </div>
     </div>

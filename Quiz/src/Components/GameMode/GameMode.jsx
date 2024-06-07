@@ -1,17 +1,24 @@
 import { Button, ConfigProvider } from "antd";
 import { useState } from "react";
 import { useStepContext } from "../../CustomHooks/StepContext";
+import { useGameINformationContext } from "../../CustomHooks/GameInformation";
 
 export default function GameMode() {
-  const [choice, setChoice] = useState(true);
-  const { incrementStep } = useStepContext();
+  const [choice, setChoice] = useState("single");
+  const { incrementStep, decrementStep } = useStepContext();
+  const { setNewInfo } = useGameINformationContext();
 
   const handleButtonMode = (name) => {
     if (name === "single") {
-      setChoice(true);
+      setChoice("single");
     } else {
-      setChoice(false);
+      setChoice("multi");
     }
+  };
+
+  const handleNextButton = () => {
+    incrementStep();
+    setNewInfo("gameMode", choice);
   };
 
   return (
@@ -26,7 +33,7 @@ export default function GameMode() {
       >
         <div className="space-x-6">
           <Button
-            type={choice ? "primary" : "default"}
+            type={choice === "single" ? "primary" : "default"}
             onClick={() => handleButtonMode("single")}
             className=" w-48 "
           >
@@ -34,15 +41,18 @@ export default function GameMode() {
           </Button>
           <Button
             onClick={() => handleButtonMode("multi")}
-            type={!choice ? "primary" : "default"}
+            type={choice === "multi" ? "primary" : "default"}
             className="w-48"
           >
             Multi
           </Button>
         </div>
       </ConfigProvider>
-      <div className="mt-4">
-        <Button type="primary" onClick={() => incrementStep()}>
+      <div className="flex w-auto gap-4 mt-4 ">
+        <Button type="default" onClick={() => decrementStep()}>
+          Back
+        </Button>
+        <Button type="primary" onClick={() => handleNextButton()}>
           Next
         </Button>
       </div>

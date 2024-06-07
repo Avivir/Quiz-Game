@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, message, Steps, theme, ConfigProvider } from "antd";
+import { Steps, ConfigProvider } from "antd";
 import "./Stepper.css";
 import { useStepContext } from "../../CustomHooks/StepContext";
 
@@ -11,14 +11,7 @@ export default function Stepper({ steps }) {
     setCurrent(step);
   }, [step]);
 
-  //   const items = steps?.map((name, i) => (
-  //     <div className="step-item" key={i}>
-  //       <div className="step">{i + 1}</div>
-  //       <p className="text-gray-400">{name}</p>
-  //     </div>
-  //   ));
-
-  const items = steps.map((item) => ({
+  const items = steps?.map((item) => ({
     title: item,
   }));
 
