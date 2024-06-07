@@ -4,6 +4,7 @@ import { useStepContext } from "../../CustomHooks/StepContext";
 import "./GamePrep.css";
 import GameMode from "../GameMode/GameMode";
 import Categories from "../Categories/Categories";
+import DifficultyLevel from "../DifficultyLevel/DifficultyLevel";
 
 export default function GamePrep() {
   const { step } = useStepContext();
@@ -20,7 +21,7 @@ export default function GamePrep() {
       content = <Categories />;
       break;
     case 3:
-      content = <h1>This is level 3</h1>;
+      content = <DifficultyLevel />;
       break;
   }
 

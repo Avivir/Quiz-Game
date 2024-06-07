@@ -1,16 +1,15 @@
 import { Input, Button } from "antd";
 import { useState } from "react";
 import { useStepContext } from "../../CustomHooks/StepContext.jsx";
+import { useGameINformationContext } from "../../CustomHooks/GameInformation.jsx";
 
 export default function PlayerName() {
   const [name, setName] = useState("");
   const { step, incrementStep } = useStepContext();
+  const { setNewInformation } = useGameINformationContext();
 
   const handleSubmit = () => {
-    if (name.length >= 5) {
-      incrementStep();
-      console.log(step);
-    }
+    setNewInformation();
   };
 
   const handleNameChanged = (event) => {

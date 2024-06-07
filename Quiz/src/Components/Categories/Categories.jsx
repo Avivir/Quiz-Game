@@ -1,5 +1,6 @@
 import { Button } from "antd";
 import { useStepContext } from "../../CustomHooks/StepContext";
+import { useState } from "react";
 import {
   SearchOutlined,
   BookOutlined,
@@ -65,6 +66,7 @@ const icons = {
 
 export default function Categories() {
   const { incrementStep } = useStepContext();
+  const [selectedButton, setSelectedButton] = useState(null);
 
   // Tablica kluczy ikon
   const iconKeys = Object.keys(icons);
@@ -75,10 +77,13 @@ export default function Categories() {
         {Array.from({ length: 24 }, (_, i) => {
           const IconComponent = icons[iconKeys[i % iconKeys.length]].component;
           const iconName = icons[iconKeys[i % iconKeys.length]].name;
+          const isSelected = selectedButton === i;
           return (
             <Button
+              type={isSelected ? "primary" : "default"}
               className="w-20 h-20 flex flex-col items-center justify-center"
               key={i}
+              onClick={() => setSelectedButton(i)}
             >
               <div className="text-2xl mb-2">{IconComponent}</div>
               <div className="text-xs">{iconName}</div>
