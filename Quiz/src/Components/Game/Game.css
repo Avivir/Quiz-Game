@@ -1,0 +1,21 @@
+.question-container {
+  @apply flex justify-center items-center;
+  @apply border-double border-8;
+  @apply rounded-tl-3xl rounded-br-3xl;
+  border-color: #45f321;
+}
+
+.question-container p {
+  @apply h-auto;
+}
+
+.question-container-reverse {
+  @apply border-double border-8;
+  @apply rounded-tr-3xl rounded-bl-3xl;
+  border-color: #45f321;
+  @apply hover:bg-orange-500;
+}
+
+.question-container-reverse p {
+  @apply h-auto;
+}

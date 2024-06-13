@@ -17,7 +17,10 @@ body {
   color: #ecf0f1;
 }
 
+body p {
+  @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl;
+}
+
 body h1 {
   font-family: "Reddit Mono", monospace;
-  /* @apply text-gray-100; */
 }
