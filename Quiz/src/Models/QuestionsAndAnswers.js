@@ -2,9 +2,12 @@ import { dummyData } from "./dummyData";
 
 export class QuestionAndAnswer {
   totalPoints = 0;
+  amountOfQuestion = 0;
+  totalQuestion = 1;
 
   constructor() {
     this.questions = [...dummyData.results];
+    this.amountOfQuestion = this.questions.length;
   }
 
   getCurrentQuestion() {
@@ -24,6 +27,7 @@ export class QuestionAndAnswer {
 
   nextQuestion() {
     this.questions.shift();
+    this.totalQuestion += 1;
     return this.getCurrentQuestion();
   }
 

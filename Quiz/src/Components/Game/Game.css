@@ -19,3 +19,18 @@
 .question-container-reverse p {
   @apply h-auto;
 }
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinking-button {
+  animation: blink 1s infinite;
+  background: #45f321;
+}

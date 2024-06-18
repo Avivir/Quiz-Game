@@ -1,25 +1,38 @@
 import Header from "../Header/Header";
 import "./Game.css";
-import { Button, Progress } from "antd";
+import { Button } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { QuestionAndAnswer } from "../../Models/QuestionsAndAnswers";
-import CountDownTimer from "../../Models/CountDownTimer";
+import CountDownTimer from "../CountDownTimer/CountDownTimer.jsx";
+import { useTimeContext } from "../../CustomHooks/TimeContext.jsx";
 
 export default function Game() {
   const questionService = useRef(new QuestionAndAnswer()).current;
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [timerStart, setTimerStart] = useState(10);
-  const [points, setPoints] = useState(0);
+  const [isBlinking, setIsBlinking] = useState(false);
+  const { userAnswer } = useTimeContext();
 
   useEffect(() => {
     setCurrentQuestion(questionService.getCurrentQuestion());
   }, [questionService]);
 
-  function newQuestion() {
+  const newQuestion = () => {
     const nextQuestion = questionService.nextQuestion();
     setCurrentQuestion(nextQuestion);
-    setTimerStart((prevTime) => !prevTime);
-  }
+    startBlinking();
+  };
+
+  const checkQuestion = (answer) => {
+    questionService.checkIsTheAnswerTrue(answer);
+    userAnswer();
+  };
+
+  const startBlinking = () => {
+    setIsBlinking(true);
+    setTimeout(() => {
+      setIsBlinking(false);
+    }, 3000);
+  };
 
   if (!currentQuestion) {
     return <p>Loading...</p>;
@@ -29,8 +42,11 @@ export default function Game() {
     <>
       <div className="flex items-center justify-between h-auto">
         <Header />
-        <p className="mr-12">Question 1 of 5</p>
-        <p className="mr-12">Score:0</p>
+        <p className="mr-12">
+          Question {questionService.totalQuestion} of{" "}
+          {questionService.amountOfQuestion}
+        </p>
+        <p className="mr-12">Score: {questionService.totalPoints}</p>
       </div>
 
       <div className="flex flex-col items-center">
@@ -41,25 +57,36 @@ export default function Game() {
             </p>
           </div>
           <div className="h-auto">
-            <CountDownTimer timeEnd={newQuestion} initialTimer={timerStart} />
+            <CountDownTimer />
           </div>
           <div className="grid grid-rows-2 grid-cols-2 h-22 gap-4">
             <Button
               ghost
-              className="w-full h-full question-container"
-              onClick={() => newQuestion("answer")}
+              className={`w-full h-full question-container ${
+                isBlinking ? "blinking-button" : ""
+              }`}
+              onClick={() => checkQuestion(currentQuestion.all_answers[0])}
             >
               <p>{currentQuestion.all_answers[0]}</p>
             </Button>
-            <Button ghost className="w-full h-full question-container-reverse">
+            <Button
+              ghost
+              className="w-full h-full question-container-reverse"
+              onClick={() => checkQuestion(currentQuestion.all_answers[1])}
+            >
               <p>{currentQuestion.all_answers[1]}</p>
             </Button>
-            <Button ghost className="w-full h-full question-container">
+            <Button
+              ghost
+              className="w-full h-full question-container"
+              onClick={() => checkQuestion(currentQuestion.all_answers[2])}
+            >
               <p>{currentQuestion.all_answers[2]}</p>
             </Button>
             <Button
               ghost
-              className="w-full h-full question-container-reverse hover:bg-red-100"
+              className="w-full h-full question-container-reverse"
+              onClick={() => checkQuestion(currentQuestion.all_answers[3])}
             >
               <p>{currentQuestion.all_answers[3]}</p>
             </Button>
