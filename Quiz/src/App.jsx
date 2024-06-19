@@ -10,9 +10,9 @@ function App() {
     <ConfigProvider theme={{ token: { colorPrimary: "#45f321" } }}>
       <Router>
         <Routes>
-          <Route path="/game" element={<GameSetup />} />
+          <Route path="/" element={<GameSetup />} />
           <Route
-            path="/"
+            path="/game"
             element={
               <TimeProvider>
                 <Game />

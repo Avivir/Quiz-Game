@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, createContext, useContext } from "react";
+import { QuestionAndAnswer } from "../Models/QuestionsAndAnswers";
 
 export const TimeContext = createContext();
 
@@ -7,6 +8,7 @@ export const useTimeContext = () => {
 };
 
 export const TimeProvider = ({ children }) => {
+  const questionService = useRef(new QuestionAndAnswer()).current;
   const timeQuestion = 10;
   const timeBreak = 5;
 
@@ -14,6 +16,7 @@ export const TimeProvider = ({ children }) => {
   const [status, setStatus] = useState("active");
   const [isBreak, setIsBreak] = useState(false);
   const [userClickAnswer, setUserClickAnswer] = useState(false);
+  const [notAnswer, setNotAnswer] = useState(false);
   const intervalRef = useRef(null);
 
   const startTimer = (initialTime) => {
@@ -29,10 +32,11 @@ export const TimeProvider = ({ children }) => {
     setIsBreak(true);
     setTimeLeft(timeBreak);
     setStatus("exception");
+    startTimer(timeBreak);
   };
 
   const changeQuestion = () => {
-    // Logika do zmiany pytania
+    questionService.nextQuestion();
   };
 
   useEffect(() => {
@@ -43,7 +47,6 @@ export const TimeProvider = ({ children }) => {
   useEffect(() => {
     if (userClickAnswer) {
       handleRefresh();
-      startTimer(timeBreak);
     }
   }, [userClickAnswer]);
 
@@ -54,18 +57,23 @@ export const TimeProvider = ({ children }) => {
         setIsBreak(true);
         startTimer(timeBreak);
         setStatus("exception");
+        setNotAnswer(false);
+        setUserClickAnswer(true);
       } else {
         setIsBreak(false);
         startTimer(timeQuestion);
         setStatus("active");
+        setNotAnswer(true);
         changeQuestion();
         setUserClickAnswer(false);
       }
     }
-  }, [timeLeft, isBreak, timeQuestion, timeBreak, changeQuestion]);
+  }, [timeLeft, isBreak, timeQuestion, timeBreak]);
 
   const userAnswer = () => {
-    setUserClickAnswer(true);
+    if (!isBreak) {
+      setUserClickAnswer(true);
+    }
   };
 
   return (
@@ -75,6 +83,9 @@ export const TimeProvider = ({ children }) => {
         status,
         userClickAnswer,
         userAnswer,
+        questionService,
+        changeQuestion,
+        notAnswer,
       }}
     >
       {children}

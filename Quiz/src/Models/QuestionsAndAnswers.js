@@ -4,6 +4,9 @@ export class QuestionAndAnswer {
   totalPoints = 0;
   amountOfQuestion = 0;
   totalQuestion = 1;
+  userAnswerQuestion = false;
+  answerIsShuffle = false;
+  shuffledAnswers = null;
 
   constructor() {
     this.questions = [...dummyData.results];
@@ -21,22 +24,33 @@ export class QuestionAndAnswer {
       ...currentQuestion.incorrect_answers,
     ];
 
-    const shuffledAnswers = this.shuffleAnswers(answers);
-    return { ...currentQuestion, all_answers: shuffledAnswers };
+    if (!this.answerIsShuffle) {
+      this.shuffledAnswers = this.shuffleAnswers(answers);
+      this.answerIsShuffle = true;
+      this.userAnswerQuestion = false;
+    }
+
+    return { ...currentQuestion, all_answers: this.shuffledAnswers };
   }
 
   nextQuestion() {
     this.questions.shift();
     this.totalQuestion += 1;
+    this.answerIsShuffle = false;
     return this.getCurrentQuestion();
   }
 
   checkIsTheAnswerTrue(answer) {
-    if (answer === this.questions[0].correct_answer) {
+    if (
+      answer === this.questions[0].correct_answer &&
+      !this.userAnswerQuestion
+    ) {
       this.totalPoints += 10;
+      this.userAnswerQuestion = true;
+      return "correct";
+    } else {
+      return "incorrect";
     }
-
-    return this.totalPoints;
   }
 
   shuffleAnswers(answers) {

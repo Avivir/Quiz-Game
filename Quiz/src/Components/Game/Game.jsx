@@ -1,42 +1,64 @@
 import Header from "../Header/Header";
 import "./Game.css";
 import { Button } from "antd";
-import { useEffect, useRef, useState } from "react";
-import { QuestionAndAnswer } from "../../Models/QuestionsAndAnswers";
+import { useEffect, useState } from "react";
 import CountDownTimer from "../CountDownTimer/CountDownTimer.jsx";
 import { useTimeContext } from "../../CustomHooks/TimeContext.jsx";
 
 export default function Game() {
-  const questionService = useRef(new QuestionAndAnswer()).current;
+  const { questionService, userAnswer, userClickAnswer, notAnswer } =
+    useTimeContext();
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [isBlinking, setIsBlinking] = useState(false);
-  const { userAnswer } = useTimeContext();
+  const [buttonNumber, setButtonNumber] = useState(false);
+  const [isBackgroundChanging, setIsBackgroundChanging] = useState(false);
 
   useEffect(() => {
     setCurrentQuestion(questionService.getCurrentQuestion());
-  }, [questionService]);
+  }, [questionService, userClickAnswer, notAnswer]);
 
-  const newQuestion = () => {
-    const nextQuestion = questionService.nextQuestion();
-    setCurrentQuestion(nextQuestion);
-    startBlinking();
-  };
-
-  const checkQuestion = (answer) => {
-    questionService.checkIsTheAnswerTrue(answer);
+  const checkQuestion = (answer, id) => {
     userAnswer();
+    if (!userClickAnswer) {
+      setButtonNumber(id);
+      startBlinking(answer);
+    }
   };
 
-  const startBlinking = () => {
+  const startBlinking = (answer) => {
     setIsBlinking(true);
+
+    setTimeout(() => {
+      setIsBackgroundChanging(questionService.checkIsTheAnswerTrue(answer));
+    }, 3000);
+
     setTimeout(() => {
       setIsBlinking(false);
     }, 3000);
+
+    setTimeout(() => {
+      setIsBackgroundChanging("none");
+    }, 5000);
   };
 
   if (!currentQuestion) {
     return <p>Loading...</p>;
   }
+
+  const getButtonClass = (isBlinking, isBackgroundChanging) => {
+    let classes = "";
+
+    if (isBlinking) {
+      classes += " blinking-button";
+    }
+
+    if (!isBlinking && isBackgroundChanging === "correct") {
+      classes += " blinking-button-green";
+    } else if (!isBlinking && isBackgroundChanging === "incorrect") {
+      classes += " blinking-button-red";
+    }
+    return classes;
+  };
 
   return (
     <>
@@ -63,30 +85,44 @@ export default function Game() {
             <Button
               ghost
               className={`w-full h-full question-container ${
-                isBlinking ? "blinking-button" : ""
+                buttonNumber === 1
+                  ? getButtonClass(isBlinking, isBackgroundChanging)
+                  : ""
               }`}
-              onClick={() => checkQuestion(currentQuestion.all_answers[0])}
+              onClick={() => checkQuestion(currentQuestion.all_answers[0], 1)}
             >
               <p>{currentQuestion.all_answers[0]}</p>
             </Button>
             <Button
               ghost
-              className="w-full h-full question-container-reverse"
-              onClick={() => checkQuestion(currentQuestion.all_answers[1])}
+              className={`w-full h-full question-container-reverse ${
+                buttonNumber === 2
+                  ? getButtonClass(isBlinking, isBackgroundChanging)
+                  : ""
+              }`}
+              onClick={() => checkQuestion(currentQuestion.all_answers[1], 2)}
             >
               <p>{currentQuestion.all_answers[1]}</p>
             </Button>
             <Button
               ghost
-              className="w-full h-full question-container"
-              onClick={() => checkQuestion(currentQuestion.all_answers[2])}
+              className={`w-full h-full question-container ${
+                buttonNumber === 3
+                  ? getButtonClass(isBlinking, isBackgroundChanging)
+                  : ""
+              }`}
+              onClick={() => checkQuestion(currentQuestion.all_answers[2], 3)}
             >
               <p>{currentQuestion.all_answers[2]}</p>
             </Button>
             <Button
               ghost
-              className="w-full h-full question-container-reverse"
-              onClick={() => checkQuestion(currentQuestion.all_answers[3])}
+              className={`w-full h-full question-container-reverse ${
+                buttonNumber === 4
+                  ? getButtonClass(isBlinking, isBackgroundChanging)
+                  : ""
+              }`}
+              onClick={() => checkQuestion(currentQuestion.all_answers[3], 4)}
             >
               <p>{currentQuestion.all_answers[3]}</p>
             </Button>
