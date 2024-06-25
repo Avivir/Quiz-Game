@@ -2,15 +2,18 @@ import { Button } from "antd";
 import { useState } from "react";
 import { useGameINformationContext } from "../../CustomHooks/GameInformation";
 import { useStepContext } from "../../CustomHooks/StepContext";
+import { useNavigate } from "react-router-dom";
 
 export default function DifficultyLevel() {
   const [selectedButton, setSelectedButton] = useState("easy");
   const { getInformationAsJson, setNewInfo } = useGameINformationContext();
   const { decrementStep } = useStepContext();
+  const navigate = useNavigate();
 
   const startHandle = (selectedButton) => {
     setNewInfo("difficulty", selectedButton);
     console.log(getInformationAsJson());
+    navigate("/game");
   };
 
   return (

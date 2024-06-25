@@ -1,0 +1,61 @@
+.question-container {
+  @apply flex justify-center items-center;
+  @apply border-double border-8;
+  @apply rounded-tl-3xl rounded-br-3xl;
+  border-color: #45f321;
+}
+
+.question-container p {
+  @apply h-auto;
+}
+
+.question-container-reverse {
+  @apply border-double border-8;
+  @apply rounded-tr-3xl rounded-bl-3xl;
+  border-color: #45f321;
+  @apply hover:bg-orange-500;
+}
+
+.question-container-reverse p {
+  @apply h-auto;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes changeBackgroundToRed {
+  0% {
+    background-color: initial;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+@keyframes changeBackgroundToGreen {
+  0% {
+    background-color: initial;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+.blinking-button {
+  animation: blink 1s infinite;
+}
+
+.blinking-button-red {
+  animation: changeBackgroundToRed forwards;
+}
+
+.blinking-button-green {
+  animation: changeBackgroundToGreen forwards;
+}
