@@ -26,7 +26,7 @@ export default function GamePrep() {
   }
 
   return (
-    <div className="flex justify-center h-auto">
+    <div className="flex justify-center ">
       <div id="game-prep-container">
         <Stepper
           steps={[

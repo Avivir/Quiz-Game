@@ -4,7 +4,6 @@ import { Button } from "antd";
 import { useEffect, useState } from "react";
 import CountDownTimer from "../CountDownTimer/CountDownTimer.jsx";
 import { useTimeContext } from "../../CustomHooks/TimeContext.jsx";
-import ShowResult from "../ShowResult/ShowResult.jsx";
 
 export default function Game() {
   const { questionService, userAnswer, userClickAnswer, notAnswer } =
@@ -13,15 +12,9 @@ export default function Game() {
   const [isBlinking, setIsBlinking] = useState(false);
   const [buttonNumber, setButtonNumber] = useState(false);
   const [isBackgroundChanging, setIsBackgroundChanging] = useState(false);
-  const [gameEnded, setGameEnded] = useState(false);
 
   useEffect(() => {
-    const question = questionService.getCurrentQuestion();
-    if (question) {
-      setCurrentQuestion(question);
-    } else {
-      setGameEnded(true);
-    }
+    setCurrentQuestion(questionService.getCurrentQuestion());
   }, [questionService, userClickAnswer, notAnswer]);
 
   const checkQuestion = (answer, id) => {
@@ -136,7 +129,6 @@ export default function Game() {
           </div>
         </div>
       </div>
-      {gameEnded && <ShowResult />}
     </>
   );
 }

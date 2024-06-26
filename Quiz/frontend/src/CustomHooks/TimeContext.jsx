@@ -9,7 +9,9 @@ export const useTimeContext = () => {
 };
 
 export const TimeProvider = ({ children }) => {
-  const questionService = useRef(new QuestionAndAnswer()).current;
+  const {questions} = useQuestionsContext();
+
+  const questionService = useRef(new QuestionAndAnswer(questions)).current;
   const timeQuestion = 10;
   const timeBreak = 5;
 

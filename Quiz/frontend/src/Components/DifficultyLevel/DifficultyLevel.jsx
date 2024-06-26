@@ -11,10 +11,37 @@ export default function DifficultyLevel() {
   const { decrementStep } = useStepContext();
   const {setQuestionsFromApi} = useQuestionsContext();
   const navigate = useNavigate();
+  // const {isStartButtonClicked, setIsStartButtonClicked} = useState(false);
+ const [loadings, setLoadings] = useState(false);
 
-  const startHandle = (selectedButton) => {
+  const startHandle = async (selectedButton) => {
+    setLoadings(true)
+    let questions = null;
+    try {
+      const response = await fetch('http://localhost:8080/api/questions/get/10', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({getInformationAsJson})
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      questions = await response.json();
+
+
+      console.log('Pobrano pytania:', questions);
+    } catch (error) {
+      console.error('Błąd podczas pobierania pytań:', error);
+    }
+
+    setQuestionsFromApi(questions)
+
     setNewInfo("difficulty", selectedButton);
-    console.log(getInformationAsJson());
+    setLoadings(false)
     navigate("/game");
   };
 
@@ -44,7 +71,7 @@ export default function DifficultyLevel() {
             Hard
           </Button>
         </div>
-        <div className="mt-8 mb-5 flex justify-center w-auto gap-4">
+        <div className="mt-8 flex justify-center w-auto gap-4">
           <Button type="default" onClick={() => decrementStep()}>
             Back
           </Button>
