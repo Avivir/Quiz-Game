@@ -29,7 +29,7 @@ export default function Scoreboard() {
             ))}
           </div>
         </div>
-        <Link to="/index">
+        <Link to="/">
           <Button className="mt-5">Back to main menu</Button>
         </Link>
       </div>
