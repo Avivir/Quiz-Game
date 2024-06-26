@@ -13,6 +13,10 @@ export class QuestionAndAnswer {
     this.amountOfQuestion = this.questions.length;
   }
 
+  getStateInfo() {
+    return this.questions.length;
+  }
+
   getCurrentQuestion() {
     if (this.questions.length === 0) {
       return null;

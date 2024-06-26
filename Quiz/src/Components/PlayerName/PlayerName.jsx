@@ -38,7 +38,11 @@ export default function PlayerName() {
         {error && (
           <Alert message={error} type="error" showIcon className="mt-2" />
         )}
-        <Button className="mt-3 self-end" onClick={handleSubmit} type="primary">
+        <Button
+          className="mt-3 mb-5 self-end"
+          onClick={handleSubmit}
+          type="primary"
+        >
           Next
         </Button>
       </div>

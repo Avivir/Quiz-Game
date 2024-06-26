@@ -103,7 +103,7 @@ export default function Categories() {
           );
         })}
       </div>
-      <div className="mt-8 flex w-auto gap-4">
+      <div className="mt-8 mb-5 flex w-auto gap-4">
         <Button type="default" onClick={() => decrementStep()}>
           Back
         </Button>
