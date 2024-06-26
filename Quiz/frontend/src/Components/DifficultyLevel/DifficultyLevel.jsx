@@ -3,11 +3,13 @@ import { useState } from "react";
 import { useGameINformationContext } from "../../CustomHooks/GameInformation";
 import { useStepContext } from "../../CustomHooks/StepContext";
 import { useNavigate } from "react-router-dom";
+import {useQuestionsContext} from '../../CustomHooks/QuestionsContext.jsx'
 
 export default function DifficultyLevel() {
   const [selectedButton, setSelectedButton] = useState("easy");
   const { getInformationAsJson, setNewInfo } = useGameINformationContext();
   const { decrementStep } = useStepContext();
+  const {setQuestionsFromApi} = useQuestionsContext();
   const navigate = useNavigate();
 
   const startHandle = (selectedButton) => {
@@ -46,7 +48,7 @@ export default function DifficultyLevel() {
           <Button type="default" onClick={() => decrementStep()}>
             Back
           </Button>
-          <Button type="primary" onClick={() => startHandle(selectedButton)}>
+          <Button loading={loadings} type="primary" onClick={() => startHandle(selectedButton)}>
             Start
           </Button>
         </div>

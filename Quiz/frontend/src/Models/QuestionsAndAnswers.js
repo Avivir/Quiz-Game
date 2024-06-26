@@ -1,4 +1,4 @@
-import { dummyData } from "./dummyData.js";
+import {dummyData} from "./dummyData.js";
 
 export class QuestionAndAnswer {
   totalPoints = 0;
@@ -8,13 +8,9 @@ export class QuestionAndAnswer {
   answerIsShuffle = false;
   shuffledAnswers = null;
 
-  constructor() {
-    this.questions = [...dummyData.results];
+  constructor(questionsDataFromApi) {
+    this.questions = questionsDataFromApi;
     this.amountOfQuestion = this.questions.length;
-  }
-
-  getStateInfo() {
-    return this.questions.length;
   }
 
   getCurrentQuestion() {
