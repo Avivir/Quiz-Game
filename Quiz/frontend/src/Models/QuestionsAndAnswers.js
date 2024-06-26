@@ -1,4 +1,4 @@
-import { dummyData } from "./dummyData";
+import { dummyData } from "./dummyData.js";
 
 export class QuestionAndAnswer {
   totalPoints = 0;
