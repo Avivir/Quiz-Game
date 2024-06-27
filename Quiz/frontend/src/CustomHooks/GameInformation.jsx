@@ -9,7 +9,7 @@ export const useGameInformationContext = () => {
 export const GameInformationProvider = ({ children }) => {
   const [information, setNewInformation] = useState({
     playerName: "Player",
-    gameMode: "Single",
+    questionsAmount: 1,
     category: "",
     difficulty: "",
     totalPoints: 0,
