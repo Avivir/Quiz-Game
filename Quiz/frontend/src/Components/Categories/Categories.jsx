@@ -27,7 +27,7 @@ import {
   PropertySafetyOutlined,
   SmileOutlined,
 } from "@ant-design/icons";
-import { useGameINformationContext } from "../../CustomHooks/GameInformation";
+import { useGameInformationContext } from "../../CustomHooks/GameInformation";
 
 const icons = {
   SearchOutlined: { component: <SearchOutlined />, name: "general" },
@@ -69,7 +69,7 @@ export default function Categories() {
   const { incrementStep, decrementStep } = useStepContext();
   const [selectedButton, setSelectedButton] = useState(0);
   const [categoryName, setCategoryName] = useState("general");
-  const { setNewInfo } = useGameINformationContext();
+  const { setNewInfo } = useGameInformationContext();
 
   const iconKeys = Object.keys(icons);
 

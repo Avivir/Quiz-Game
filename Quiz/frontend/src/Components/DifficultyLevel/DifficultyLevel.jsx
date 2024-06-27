@@ -1,47 +1,51 @@
 import { Button } from "antd";
 import { useState } from "react";
-import { useGameINformationContext } from "../../CustomHooks/GameInformation";
+import { useGameInformationContext } from "../../CustomHooks/GameInformation";
 import { useStepContext } from "../../CustomHooks/StepContext";
 import { useNavigate } from "react-router-dom";
-import {useQuestionsContext} from '../../CustomHooks/QuestionsContext.jsx'
+import { useQuestionsContext } from "../../CustomHooks/QuestionsContext.jsx";
+import { useTimeContext } from "../../CustomHooks/TimeContext.jsx";
 
 export default function DifficultyLevel() {
   const [selectedButton, setSelectedButton] = useState("easy");
-  const { getInformationAsJson, setNewInfo } = useGameINformationContext();
+  const { getInformationAsJson, setNewInfo } = useGameInformationContext();
   const { decrementStep } = useStepContext();
-  const {setQuestionsFromApi} = useQuestionsContext();
+  const { setQuestionsFromApi } = useQuestionsContext();
+  const { setNewQuestionService } = useTimeContext();
   const navigate = useNavigate();
-  // const {isStartButtonClicked, setIsStartButtonClicked} = useState(false);
- const [loadings, setLoadings] = useState(false);
+  const [loadings, setLoadings] = useState(false);
 
   const startHandle = async (selectedButton) => {
-    setLoadings(true)
+    setLoadings(true);
     let questions = null;
     try {
-      const response = await fetch('http://localhost:8080/api/questions/get/10', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({getInformationAsJson})
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/questions/get/10",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ getInformationAsJson }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       questions = await response.json();
 
-
-      console.log('Pobrano pytania:', questions);
+      console.log("Pobrano pytania:", questions);
     } catch (error) {
-      console.error('Błąd podczas pobierania pytań:', error);
+      console.error("Błąd podczas pobierania pytań:", error);
     }
 
-    setQuestionsFromApi(questions)
+    setQuestionsFromApi(questions);
+    setNewQuestionService();
 
     setNewInfo("difficulty", selectedButton);
-    setLoadings(false)
+    setLoadings(false);
     navigate("/game");
   };
 
@@ -75,7 +79,11 @@ export default function DifficultyLevel() {
           <Button type="default" onClick={() => decrementStep()}>
             Back
           </Button>
-          <Button loading={loadings} type="primary" onClick={() => startHandle(selectedButton)}>
+          <Button
+            loading={loadings}
+            type="primary"
+            onClick={() => startHandle(selectedButton)}
+          >
             Start
           </Button>
         </div>

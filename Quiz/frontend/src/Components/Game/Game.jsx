@@ -4,17 +4,43 @@ import { Button } from "antd";
 import { useEffect, useState } from "react";
 import CountDownTimer from "../CountDownTimer/CountDownTimer.jsx";
 import { useTimeContext } from "../../CustomHooks/TimeContext.jsx";
+import ShowResult from "../ShowResult/ShowResult.jsx";
+import { useGameInformationContext } from "../../CustomHooks/GameInformation.jsx";
 
 export default function Game() {
-  const { questionService, userAnswer, userClickAnswer, notAnswer } =
-    useTimeContext();
+  const {
+    questionService,
+    userAnswer,
+    userClickAnswer,
+    notAnswer,
+    resetState,
+  } = useTimeContext();
+  const { setNewInfo } = useGameInformationContext();
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [isBlinking, setIsBlinking] = useState(false);
   const [buttonNumber, setButtonNumber] = useState(false);
   const [isBackgroundChanging, setIsBackgroundChanging] = useState(false);
+  const [gameEnded, setGameEnded] = useState(false);
+  const [isGameStarting, setIsGameStarting] = useState(false);
 
   useEffect(() => {
-    setCurrentQuestion(questionService.getCurrentQuestion());
+    if (!isGameStarting) {
+      resetState();
+      setIsGameStarting(true);
+      setGameEnded(false);
+    }
+
+    return () => {};
+  }, [resetState, setIsGameStarting, setGameEnded, isGameStarting]);
+
+  useEffect(() => {
+    const question = questionService.getCurrentQuestion();
+    if (question) {
+      setCurrentQuestion(question);
+    } else {
+      setGameEnded(true);
+      setNewInfo("totalPoints", questionService.totalPoints);
+    }
   }, [questionService, userClickAnswer, notAnswer]);
 
   const checkQuestion = (answer, id) => {
@@ -72,9 +98,9 @@ export default function Game() {
       </div>
 
       <div className="flex flex-col items-center">
-        <div className="items-center w-3/4 h-1/3">
+        <div className="items-center justify-center w-3/4 h-1/3">
           <div className="question-container">
-            <p className="flex justify-center items-center ">
+            <p className="flex justify-center items-center ml-5">
               {currentQuestion.question}
             </p>
           </div>
@@ -129,6 +155,7 @@ export default function Game() {
           </div>
         </div>
       </div>
+      {gameEnded && <ShowResult />}
     </>
   );
 }

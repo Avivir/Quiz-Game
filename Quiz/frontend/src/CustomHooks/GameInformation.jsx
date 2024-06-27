@@ -2,16 +2,17 @@ import { useState, createContext, useContext } from "react";
 
 export const GameInformationContext = createContext();
 
-export const useGameINformationContext = () => {
+export const useGameInformationContext = () => {
   return useContext(GameInformationContext);
 };
 
-export const GameInforamtionProvider = ({ children }) => {
+export const GameInformationProvider = ({ children }) => {
   const [information, setNewInformation] = useState({
     playerName: "Player",
     gameMode: "Single",
     category: "",
     difficulty: "",
+    totalPoints: 0,
   });
 
   const setNewInfo = (key, value) => {

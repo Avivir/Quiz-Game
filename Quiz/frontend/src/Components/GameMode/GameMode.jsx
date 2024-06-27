@@ -1,12 +1,12 @@
 import { Button, ConfigProvider } from "antd";
 import { useState } from "react";
 import { useStepContext } from "../../CustomHooks/StepContext";
-import { useGameINformationContext } from "../../CustomHooks/GameInformation";
+import { useGameInformationContext } from "../../CustomHooks/GameInformation";
 
 export default function GameMode() {
   const [choice, setChoice] = useState("single");
   const { incrementStep, decrementStep } = useStepContext();
-  const { setNewInfo } = useGameINformationContext();
+  const { setNewInfo } = useGameInformationContext();
 
   const handleButtonMode = (name) => {
     if (name === "single") {

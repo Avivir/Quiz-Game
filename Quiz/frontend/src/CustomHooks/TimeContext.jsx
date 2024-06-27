@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, createContext, useContext } from "react";
 import { QuestionAndAnswer } from "../Models/QuestionsAndAnswers";
-import {useQuestionsContext} from '../CustomHooks/QuestionsContext.jsx'
+import { useQuestionsContext } from "../CustomHooks/QuestionsContext.jsx";
 
 export const TimeContext = createContext();
 
@@ -9,9 +9,12 @@ export const useTimeContext = () => {
 };
 
 export const TimeProvider = ({ children }) => {
-  const {questions} = useQuestionsContext();
+  const { questions } = useQuestionsContext();
 
-  const questionService = useRef(new QuestionAndAnswer(questions)).current;
+  const [questionService, setQuestionService] = useState(
+    () => new QuestionAndAnswer(questions)
+  );
+  //const questionService = questionServiceRef.current;
   const timeQuestion = 10;
   const timeBreak = 5;
 
@@ -79,6 +82,22 @@ export const TimeProvider = ({ children }) => {
     }
   };
 
+  const resetState = () => {
+    clearInterval(intervalRef.current);
+    setTimeLeft(timeQuestion);
+    setStatus("active");
+    setIsBreak(false);
+    setUserClickAnswer(false);
+    setNotAnswer(false);
+    questionService.reset();
+    startTimer(timeQuestion);
+    questionService.addQuestionsFromApi(questions);
+  };
+
+  const setNewQuestionService = () => {
+    setQuestionService(() => new QuestionAndAnswer(questions));
+  };
+
   return (
     <TimeContext.Provider
       value={{
@@ -89,6 +108,8 @@ export const TimeProvider = ({ children }) => {
         questionService,
         changeQuestion,
         notAnswer,
+        resetState,
+        setNewQuestionService,
       }}
     >
       {children}

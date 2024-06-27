@@ -1,4 +1,4 @@
-import {dummyData} from "./dummyData.js";
+import { dummyData } from "./dummyData.js";
 
 export class QuestionAndAnswer {
   totalPoints = 0;
@@ -9,7 +9,12 @@ export class QuestionAndAnswer {
   shuffledAnswers = null;
 
   constructor(questionsDataFromApi) {
-    this.questions = questionsDataFromApi;
+    this.questions = [...dummyData.results];
+    this.amountOfQuestion = this.questions.length;
+  }
+
+  addQuestionsFromApi(questionsDataFromApi) {
+    this.questions = [...dummyData.results];
     this.amountOfQuestion = this.questions.length;
   }
 
@@ -51,6 +56,11 @@ export class QuestionAndAnswer {
     } else {
       return "incorrect";
     }
+  }
+
+  reset() {
+    this.currentQuestionIndex = 0;
+    this.totalPoints = 0;
   }
 
   shuffleAnswers(answers) {
