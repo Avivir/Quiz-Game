@@ -24,7 +24,7 @@ export default function GameMode() {
           size="large"
         />
       </div>
-      <div className="flex w-auto gap-4 mt-4 ">
+      <div className="flex w-auto gap-4 mt-4 mb-5">
         <Button type="default" onClick={() => decrementStep()}>
           Back
         </Button>

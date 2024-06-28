@@ -75,7 +75,7 @@ export default function DifficultyLevel() {
             Hard
           </Button>
         </div>
-        <div className="mt-8 flex justify-center w-auto gap-4">
+        <div className="mt-8 flex justify-center w-auto gap-4 mb-5">
           <Button type="default" onClick={() => decrementStep()}>
             Back
           </Button>

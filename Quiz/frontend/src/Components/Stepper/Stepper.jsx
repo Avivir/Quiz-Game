@@ -35,16 +35,3 @@ export default function Stepper({ steps }) {
     </div>
   );
 }
-
-// export default function ProgressBar({ steps }) {
-//   return (
-//     <div className="flex justify-between h-auto mt-4">
-//       {steps?.map((name, i) => (
-//         <div className="step-item" key={i}>
-//           <div className="step">{i + 1}</div>
-//           <p className="text-gray-400">{name}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }

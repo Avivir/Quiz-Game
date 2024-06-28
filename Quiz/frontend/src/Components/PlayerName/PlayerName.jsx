@@ -26,7 +26,7 @@ export default function PlayerName() {
 
   return (
     <div className="h-auto flex flex-col items-center justify-center w-full mt-16">
-      <div className="w-2/6 flex flex-col items-start">
+      <div className="w-2/6 flex flex-col items-start mb-5">
         <h2 className="mb-2">Enter your name</h2>
         <Input
           className="h-auto w-full"

@@ -8,44 +8,42 @@ export default function Index() {
   return (
     <>
       <Header />
-      <div className="flex flex-col h-screen">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-row w-full max-w-screen-xl mx-auto">
-            <Link to="/setup" className="flex-1">
-              <Button
-                className="w-full h-2/3"
-                style={{
-                  backgroundImage: `url(${gameImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "24px",
-                }}
-              >
-                Start new Game
-              </Button>
-            </Link>
-            <Link to="/scoreboard" className="flex-1">
-              <Button
-                className="w-full h-2/3"
-                style={{
-                  backgroundImage: `url(${scoreboardImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  color: "white",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "24px",
-                }}
-              >
-                Scoreboard
-              </Button>
-            </Link>
-          </div>
+      <div className="flex flex-row h-auto justify-center space-x-10">
+        <div>
+          <Link to="/setup">
+            <p className="flex h-auto justify-center mb-5">Start new game</p>
+            <Button
+              className="w-96 h-96"
+              style={{
+                backgroundImage: `url(${gameImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+              }}
+            ></Button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/scoreboard">
+            <p className="flex h-auto justify-center mb-5">Scoreboard</p>
+            <Button
+              className="w-96 h-96"
+              style={{
+                backgroundImage: `url(${scoreboardImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+              }}
+            ></Button>
+          </Link>
         </div>
       </div>
     </>

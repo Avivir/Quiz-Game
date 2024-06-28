@@ -93,7 +93,7 @@ export default function Categories() {
           return (
             <Button
               type={isSelected ? "primary" : "default"}
-              className="w-20 h-20 flex flex-col items-center justify-center"
+              className="w-16 h-16 flex flex-col items-center justify-center"
               key={i}
               onClick={() => handleCategoryButtonClick(i, iconName)}
             >
@@ -103,7 +103,7 @@ export default function Categories() {
           );
         })}
       </div>
-      <div className="mt-8 flex w-auto gap-4">
+      <div className="mt-8 flex w-auto gap-4 mb-5">
         <Button type="default" onClick={() => decrementStep()}>
           Back
         </Button>

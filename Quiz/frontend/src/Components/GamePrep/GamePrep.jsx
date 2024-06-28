@@ -26,12 +26,12 @@ export default function GamePrep() {
   }
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center h-auto">
       <div id="game-prep-container">
         <Stepper
           steps={[
             "Enter your name",
-            "choose game mode",
+            "select amount of questions",
             "choose category",
             "choose dificulty",
           ]}

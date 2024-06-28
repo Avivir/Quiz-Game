@@ -87,7 +87,7 @@ export default function Game() {
   };
 
   return (
-    <>
+    <div className="">
       <div className="flex items-center justify-between h-auto">
         <Header />
         <p className="mr-12">
@@ -99,7 +99,7 @@ export default function Game() {
 
       <div className="flex flex-col items-center">
         <div className="items-center justify-center w-3/4 h-1/3">
-          <div className="question-container">
+          <div className="question-container ">
             <p className="flex justify-center items-center ml-5">
               {currentQuestion.question}
             </p>
@@ -107,7 +107,7 @@ export default function Game() {
           <div className="h-auto">
             <CountDownTimer />
           </div>
-          <div className="grid grid-rows-2 grid-cols-2 h-22 gap-4">
+          <div className="grid grid-rows-2 grid-cols-2 gap-4">
             <Button
               ghost
               className={`w-full h-full question-container ${
@@ -156,6 +156,6 @@ export default function Game() {
         </div>
       </div>
       {gameEnded && <ShowResult />}
-    </>
+    </div>
   );
 }

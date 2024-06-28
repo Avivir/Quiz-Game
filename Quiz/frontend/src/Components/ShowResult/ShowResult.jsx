@@ -9,11 +9,12 @@ export default function ShowResult() {
 
   //Tutaj możesz pobrać wynik zawodnika
   const handlePassDataToBackend = (endpoint) => {
+    console.log(getInformationAsJson());
     navigate(endpoint);
   };
 
   return (
-    <div className="relative h-screen flex items-center justify-center bg-gray-100">
+    <div className="relative h-auto flex items-center justify-center bg-gray-100">
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center blur-bg">
         <div className="w-3/4 h-2/3 border-8 bg-color p-4 rounded-lg shadow-lg">
           <div className="flex flex-col justify-center items-center h-full">
