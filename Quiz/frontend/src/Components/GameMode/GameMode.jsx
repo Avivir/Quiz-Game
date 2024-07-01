@@ -19,7 +19,7 @@ export default function GameMode() {
         <InputNumber
           min={1}
           max={40}
-          defaultValue={1}
+          defaultValue={5}
           onChange={(value) => setInputValue(value)}
           size="large"
         />

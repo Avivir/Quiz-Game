@@ -2,6 +2,7 @@ import { Input, Button, Alert } from "antd";
 import { useState } from "react";
 import { useStepContext } from "../../CustomHooks/StepContext.jsx";
 import { useGameInformationContext } from "../../CustomHooks/GameInformation.jsx";
+import { Link } from "react-router-dom";
 
 export default function PlayerName() {
   const [name, setName] = useState("");
@@ -38,9 +39,25 @@ export default function PlayerName() {
         {error && (
           <Alert message={error} type="error" showIcon className="mt-2" />
         )}
-        <Button className="mt-3 self-end" onClick={handleSubmit} type="primary">
-          Next
-        </Button>
+        <div className="flex-row self-end">
+          <Link to="/">
+            <Button
+              className="mt-3 mr-4 self-end"
+              onClick={handleSubmit}
+              type="default"
+            >
+              Back to main menu
+            </Button>
+          </Link>
+
+          <Button
+            className="mt-3 self-end"
+            onClick={handleSubmit}
+            type="primary"
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );

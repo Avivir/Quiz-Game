@@ -87,7 +87,7 @@ export default function Game() {
   };
 
   return (
-    <div className="">
+    <>
       <div className="flex items-center justify-between h-auto">
         <Header />
         <p className="mr-12">
@@ -96,66 +96,68 @@ export default function Game() {
         </p>
         <p className="mr-12">Score: {questionService.totalPoints}</p>
       </div>
-
-      <div className="flex flex-col items-center">
-        <div className="items-center justify-center w-3/4 h-1/3">
-          <div className="question-container ">
-            <p className="flex justify-center items-center ml-5">
-              {currentQuestion.question}
-            </p>
-          </div>
-          <div className="h-auto">
-            <CountDownTimer />
-          </div>
-          <div className="grid grid-rows-2 grid-cols-2 gap-4">
-            <Button
-              ghost
-              className={`w-full h-full question-container ${
-                buttonNumber === 1
-                  ? getButtonClass(isBlinking, isBackgroundChanging)
-                  : ""
-              }`}
-              onClick={() => checkQuestion(currentQuestion.all_answers[0], 1)}
-            >
-              <p>{currentQuestion.all_answers[0]}</p>
-            </Button>
-            <Button
-              ghost
-              className={`w-full h-full question-container-reverse ${
-                buttonNumber === 2
-                  ? getButtonClass(isBlinking, isBackgroundChanging)
-                  : ""
-              }`}
-              onClick={() => checkQuestion(currentQuestion.all_answers[1], 2)}
-            >
-              <p>{currentQuestion.all_answers[1]}</p>
-            </Button>
-            <Button
-              ghost
-              className={`w-full h-full question-container ${
-                buttonNumber === 3
-                  ? getButtonClass(isBlinking, isBackgroundChanging)
-                  : ""
-              }`}
-              onClick={() => checkQuestion(currentQuestion.all_answers[2], 3)}
-            >
-              <p>{currentQuestion.all_answers[2]}</p>
-            </Button>
-            <Button
-              ghost
-              className={`w-full h-full question-container-reverse ${
-                buttonNumber === 4
-                  ? getButtonClass(isBlinking, isBackgroundChanging)
-                  : ""
-              }`}
-              onClick={() => checkQuestion(currentQuestion.all_answers[3], 4)}
-            >
-              <p>{currentQuestion.all_answers[3]}</p>
-            </Button>
+      <div className="flex flex-col h-auto">
+        <div className="flex-grow flex flex-col items-center">
+          <div className="items-center justify-center w-3/4 h-64">
+            <div className="question-container">
+              <p className="flex justify-center items-center ml-5">
+                {currentQuestion.question}
+              </p>
+            </div>
+            <div className="h-auto">
+              <CountDownTimer />
+            </div>
+            <div className="grid grid-rows-2 grid-cols-2 gap-4">
+              <Button
+                ghost
+                className={`w-full h-full question-container ${
+                  buttonNumber === 1
+                    ? getButtonClass(isBlinking, isBackgroundChanging)
+                    : ""
+                }`}
+                onClick={() => checkQuestion(currentQuestion.all_answers[0], 1)}
+              >
+                <p>{currentQuestion.all_answers[0]}</p>
+              </Button>
+              <Button
+                ghost
+                className={`w-full h-full question-container-reverse ${
+                  buttonNumber === 2
+                    ? getButtonClass(isBlinking, isBackgroundChanging)
+                    : ""
+                }`}
+                onClick={() => checkQuestion(currentQuestion.all_answers[1], 2)}
+              >
+                <p>{currentQuestion.all_answers[1]}</p>
+              </Button>
+              <Button
+                ghost
+                className={`w-full h-full question-container ${
+                  buttonNumber === 3
+                    ? getButtonClass(isBlinking, isBackgroundChanging)
+                    : ""
+                }`}
+                onClick={() => checkQuestion(currentQuestion.all_answers[2], 3)}
+              >
+                <p>{currentQuestion.all_answers[2]}</p>
+              </Button>
+              <Button
+                ghost
+                className={`w-full h-full question-container-reverse ${
+                  buttonNumber === 4
+                    ? getButtonClass(isBlinking, isBackgroundChanging)
+                    : ""
+                }`}
+                onClick={() => checkQuestion(currentQuestion.all_answers[3], 4)}
+              >
+                <p>{currentQuestion.all_answers[3]}</p>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
+
       {gameEnded && <ShowResult />}
-    </div>
+    </>
   );
 }
