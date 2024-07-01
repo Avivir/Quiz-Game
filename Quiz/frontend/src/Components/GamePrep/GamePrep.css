@@ -1,0 +1,5 @@
+#game-prep-container {
+  @apply h-4/5 w-2/3 rounded-lg border;
+  border-color: #bdc3c7;
+  background: #34495e;
+}

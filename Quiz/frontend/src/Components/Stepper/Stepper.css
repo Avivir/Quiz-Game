@@ -1,0 +1,9 @@
+.custom-steps .ant-steps-item-wait .ant-steps-item-icon {
+  background-color: #f0f0f0;
+  border-color: #f0f0f0;
+  color: black;
+}
+
+.custom-steps {
+  height: auto;
+}
