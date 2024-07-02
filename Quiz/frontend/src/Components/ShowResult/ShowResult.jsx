@@ -7,11 +7,29 @@ export default function ShowResult() {
   const { information, getInformationAsJson } = useGameInformationContext();
   const navigate = useNavigate();
 
-  //Tutaj możesz pobrać wynik zawodnika
+
   const handlePassDataToBackend = (endpoint) => {
-    console.log(getInformationAsJson());
+   addPlayerScore()
+
     navigate(endpoint);
   };
+
+  const addPlayerScore = () => {
+      fetch(
+          "http://localhost:8080/api/players/add",
+          {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: getInformationAsJson()
+          }
+      ).then(r => {
+          console.log("Your record added")
+      }).catch(reason => {
+          console.log("There was a problem while add user record to db" , reason)
+      });
+  }
 
   return (
     <div className="relative h-auto flex items-center justify-center bg-gray-100">

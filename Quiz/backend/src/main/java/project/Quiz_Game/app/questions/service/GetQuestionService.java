@@ -1,25 +1,26 @@
 package project.Quiz_Game.app.questions.service;
 
 import org.springframework.stereotype.Service;
-import project.Quiz_Game.app.trivia.controller.TriviaController;
+import project.Quiz_Game.app.questions.QuizProperties;
+import project.Quiz_Game.app.trivia.api.TriviaApi;
 import project.Quiz_Game.app.trivia.dto.TriviaQuestion;
 import project.Quiz_Game.app.trivia.dto.TriviaResponse;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
 public class GetQuestionService {
 
-    private static TriviaController triviaController;
+    private static TriviaApi triviaApi;
 
-    public GetQuestionService(TriviaController triviaController) {
-        this.triviaController = triviaController;
+    public GetQuestionService(TriviaApi triviaApi) {
+        this.triviaApi = triviaApi;
     }
 
 
-    public List<TriviaQuestion> execute(int amount) {
-        String token = triviaController.getNewSessionToken().getToken();
+    public List<TriviaQuestion> execute(QuizProperties quizProperties) {
+        String token = triviaApi.getNewSessionToken().getToken();
 
         try {
             Thread.sleep(6000);
@@ -27,11 +28,11 @@ public class GetQuestionService {
             throw new RuntimeException(e);
         }
 
-        TriviaResponse response = triviaController.getTriviaQuestions(amount, token);
+        TriviaResponse response = triviaApi.getTriviaQuestions(quizProperties, token);
 
 
         if (response.getResponseCode() == 4) {
-            token = triviaController.resetSessionToken(token);
+            token = triviaApi.resetSessionToken(token);
         }
 
         return response.getResults();
