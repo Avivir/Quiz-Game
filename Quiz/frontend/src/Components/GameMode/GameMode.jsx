@@ -6,7 +6,7 @@ import { useGameInformationContext } from "../../CustomHooks/GameInformation";
 export default function GameMode() {
   const { incrementStep, decrementStep } = useStepContext();
   const { setNewInfo } = useGameInformationContext();
-  const [inputValue, setInputValue] = useState(1);
+  const [inputValue, setInputValue] = useState(5);
 
   const handleNextButton = () => {
     incrementStep();

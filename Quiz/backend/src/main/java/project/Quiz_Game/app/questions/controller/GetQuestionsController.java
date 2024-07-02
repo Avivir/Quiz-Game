@@ -1,17 +1,13 @@
 package project.Quiz_Game.app.questions.controller;
 
-import jakarta.websocket.server.PathParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import project.Quiz_Game.app.questions.QuizProperties;
 import project.Quiz_Game.app.questions.action.GetQuestionsAction;
 import project.Quiz_Game.app.trivia.dto.TriviaQuestion;
 
 import java.util.List;
 
-//TODO Adres do ogarniecia
-//@CrossOrigin("")
+//@CrossOrigin("localhost:5187")
 @RestController
 @RequestMapping("/api/questions")
 public class GetQuestionsController {
@@ -22,6 +18,16 @@ public class GetQuestionsController {
         this.getQuestionsAction = getQuestionsAction;
     }
 
-    @GetMapping("/get/{amount}")
-    public List<TriviaQuestion> getQuestions(@PathVariable int amount) {return getQuestionsAction.execute(amount);}
+    @PostMapping("/get/{amount}")
+    public List<TriviaQuestion> getQuestionsByAmount(@PathVariable int amount) {
+        QuizProperties quizProperties = new QuizProperties();
+        quizProperties.setQuestionsAmount(amount);
+        return getQuestionsAction.get(quizProperties);
+    }
+
+
+    @PostMapping("/get/filter")
+    public List<TriviaQuestion> getQuestionByFilter(@RequestBody QuizProperties quizProperties) {
+        return getQuestionsAction.get(quizProperties);
+    }
 }

@@ -10,8 +10,9 @@ export const GameInformationProvider = ({ children }) => {
   const [information, setNewInformation] = useState({
     playerName: "Player",
     questionsAmount: 1,
-    category: "",
-    difficulty: "",
+    categoryId: 9,
+    categoryName: "General Knowledge",
+    difficulty: "easy",
     totalPoints: 0,
   });
 

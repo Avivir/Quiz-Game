@@ -17,16 +17,18 @@ export default function DifficultyLevel() {
 
   const startHandle = async (selectedButton) => {
     setLoadings(true);
+    setNewInfo("difficulty", selectedButton);
+
     let questions = null;
     try {
       const response = await fetch(
-        "http://localhost:8080/api/questions/get/10",
+        "http://localhost:8080/api/questions/get/filter",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ getInformationAsJson }),
+          body: getInformationAsJson(),
         }
       );
 
@@ -34,6 +36,7 @@ export default function DifficultyLevel() {
         throw new Error("Network response was not ok");
       }
 
+      console.log(getInformationAsJson())
       questions = await response.json();
 
       console.log("Pobrano pytania:", questions);
@@ -44,7 +47,7 @@ export default function DifficultyLevel() {
     setQuestionsFromApi(questions);
     setNewQuestionService();
 
-    setNewInfo("difficulty", selectedButton);
+
     setLoadings(false);
     navigate("/game");
   };

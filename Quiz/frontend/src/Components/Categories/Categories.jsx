@@ -30,57 +30,52 @@ import {
 import { useGameInformationContext } from "../../CustomHooks/GameInformation";
 
 const icons = {
-  SearchOutlined: { component: <SearchOutlined />, name: "general" },
-  BookOutlined: { component: <BookOutlined />, name: "books" },
-  VideoCameraOutlined: { component: <VideoCameraOutlined />, name: "film" },
-  AudioOutlined: { component: <AudioOutlined />, name: "music" },
-  PictureOutlined: { component: <PictureOutlined />, name: "theatres" },
-  PlaySquareOutlined: { component: <PlaySquareOutlined />, name: "television" },
-  RocketOutlined: { component: <RocketOutlined />, name: "game" },
-  TrophyOutlined: { component: <TrophyOutlined />, name: "board game" },
-  FireOutlined: { component: <FireOutlined />, name: "nature" },
-  AndroidOutlined: { component: <AndroidOutlined />, name: "computers" },
-  FormOutlined: { component: <FormOutlined />, name: "mathematics" },
-  HeatMapOutlined: { component: <HeatMapOutlined />, name: "mythology" },
-  DashboardOutlined: { component: <DashboardOutlined />, name: "sports" },
-  SunOutlined: { component: <SunOutlined />, name: "geography" },
-  ReadOutlined: { component: <ReadOutlined />, name: "history" },
-  SolutionOutlined: { component: <SolutionOutlined />, name: "politics" },
-  StarOutlined: { component: <StarOutlined />, name: "art" },
-  CameraOutlined: { component: <CameraOutlined />, name: "Celebrities" },
-  TwitterOutlined: { component: <TwitterOutlined />, name: "Animals" },
-  ToolOutlined: { component: <ToolOutlined />, name: "Vehicles" },
-  ThunderboltOutlined: {
-    component: <ThunderboltOutlined />,
-    name: "Comics",
-  },
-  SettingOutlined: { component: <SettingOutlined />, name: "Gadgets" },
-  PropertySafetyOutlined: {
-    component: <PropertySafetyOutlined />,
-    name: "Anime",
-  },
-  SmileOutlined: {
-    component: <SmileOutlined />,
-    name: "Cartoon",
-  },
+  SearchOutlined: { id: 9, component: <SearchOutlined />, name: "general" },
+  BookOutlined: { id: 10, component: <BookOutlined />, name: "books" },
+  VideoCameraOutlined: { id: 11, component: <VideoCameraOutlined />, name: "film" },
+  AudioOutlined: { id: 12, component: <AudioOutlined />, name: "music" },
+  PictureOutlined: { id: 13, component: <PictureOutlined />, name: "theatres" },
+  PlaySquareOutlined: { id: 14, component: <PlaySquareOutlined />, name: "television" },
+  RocketOutlined: { id: 15, component: <RocketOutlined />, name: "game" },
+  TrophyOutlined: { id: 16, component: <TrophyOutlined />, name: "board game" },
+  FireOutlined: { id: 17, component: <FireOutlined />, name: "nature" },
+  AndroidOutlined: { id: 18, component: <AndroidOutlined />, name: "computers" },
+  FormOutlined: { id: 19, component: <FormOutlined />, name: "mathematics" },
+  HeatMapOutlined: { id: 20, component: <HeatMapOutlined />, name: "mythology" },
+  DashboardOutlined: { id: 21, component: <DashboardOutlined />, name: "sports" },
+  SunOutlined: { id: 22, component: <SunOutlined />, name: "geography" },
+  ReadOutlined: { id: 23, component: <ReadOutlined />, name: "history" },
+  SolutionOutlined: { id: 24, component: <SolutionOutlined />, name: "politics" },
+  StarOutlined: { id: 25, component: <StarOutlined />, name: "art" },
+  CameraOutlined: { id: 26, component: <CameraOutlined />, name: "celebrities" },
+  TwitterOutlined: { id: 27, component: <TwitterOutlined />, name: "animals" },
+  ToolOutlined: { id: 28, component: <ToolOutlined />, name: "vehicles" },
+  ThunderboltOutlined: { id: 29, component: <ThunderboltOutlined />, name: "comics" },
+  SettingOutlined: { id: 30, component: <SettingOutlined />, name: "gadgets" },
+  PropertySafetyOutlined: { id: 31, component: <PropertySafetyOutlined />, name: "anime" },
+  SmileOutlined: { id: 32, component: <SmileOutlined />, name: "cartoon" },
 };
+
 
 export default function Categories() {
   const { incrementStep, decrementStep } = useStepContext();
   const [selectedButton, setSelectedButton] = useState(0);
-  const [categoryName, setCategoryName] = useState("general");
+  const [categoryId, setCategoryId] = useState(9);
+  const [categoryName, setCategoryName] = useState("General Knowledge");
   const { setNewInfo } = useGameInformationContext();
 
   const iconKeys = Object.keys(icons);
 
-  const handleCategoryButtonClick = (number, iconName) => {
+  const handleCategoryButtonClick = (number, iconName, iconId) => {
     setSelectedButton(number);
+    setCategoryId(iconId);
     setCategoryName(iconName);
   };
 
   const handleNextButton = () => {
     incrementStep();
-    setNewInfo("category", categoryName);
+    setNewInfo("categoryId", categoryId)
+    setNewInfo("categoryName", categoryName)
   };
 
   return (
@@ -89,13 +84,14 @@ export default function Categories() {
         {Array.from({ length: 24 }, (_, i) => {
           const IconComponent = icons[iconKeys[i % iconKeys.length]].component;
           const iconName = icons[iconKeys[i % iconKeys.length]].name;
+          const iconId = icons[iconKeys[i % iconKeys.length]].id;
           const isSelected = selectedButton === i;
           return (
             <Button
               type={isSelected ? "primary" : "default"}
               className="w-16 h-16 flex flex-col items-center justify-center"
               key={i}
-              onClick={() => handleCategoryButtonClick(i, iconName)}
+              onClick={() => handleCategoryButtonClick(i, iconName, iconId)}
             >
               <div className="text-2xl mb-2">{IconComponent}</div>
               <div className="text-xs">{iconName}</div>

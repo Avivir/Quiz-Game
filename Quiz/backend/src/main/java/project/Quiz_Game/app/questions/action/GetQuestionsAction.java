@@ -2,6 +2,7 @@ package project.Quiz_Game.app.questions.action;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
+import project.Quiz_Game.app.questions.QuizProperties;
 import project.Quiz_Game.app.questions.service.GetQuestionService;
 import project.Quiz_Game.app.trivia.dto.TriviaQuestion;
 
@@ -18,7 +19,7 @@ public class GetQuestionsAction {
         this.getQuestionService = getQuestionService;
     }
 
-    public List<TriviaQuestion> execute(int amount) {
-        return getQuestionService.execute(amount);
+    public List<TriviaQuestion> get(QuizProperties quizProperties) {
+        return getQuestionService.execute(quizProperties);
     }
 }

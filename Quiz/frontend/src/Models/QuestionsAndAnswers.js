@@ -9,12 +9,12 @@ export class QuestionAndAnswer {
   shuffledAnswers = null;
 
   constructor(questionsDataFromApi) {
-    this.questions = [...dummyData.results];
+    this.questions = questionsDataFromApi || [...dummyData.results];
     this.amountOfQuestion = this.questions.length;
   }
 
   addQuestionsFromApi(questionsDataFromApi) {
-    this.questions = [...dummyData.results];
+    this.questions = questionsDataFromApi || [...dummyData.results];
     this.amountOfQuestion = this.questions.length;
   }
 
