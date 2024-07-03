@@ -14,7 +14,8 @@ export class QuestionAndAnswer {
   }
 
   addQuestionsFromApi(questionsDataFromApi) {
-    this.questions = questionsDataFromApi || [...dummyData.results];
+    console.log(questionsDataFromApi);
+    this.questions = questionsDataFromApi;
     this.amountOfQuestion = this.questions.length;
   }
 

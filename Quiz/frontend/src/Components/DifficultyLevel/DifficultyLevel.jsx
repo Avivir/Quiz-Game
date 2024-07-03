@@ -15,9 +15,13 @@ export default function DifficultyLevel() {
   const navigate = useNavigate();
   const [loadings, setLoadings] = useState(false);
 
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const startHandle = async (selectedButton) => {
     setLoadings(true);
     setNewInfo("difficulty", selectedButton);
+
+    await wait(100);
 
     let questions = null;
     try {
@@ -36,7 +40,7 @@ export default function DifficultyLevel() {
         throw new Error("Network response was not ok");
       }
 
-      console.log(getInformationAsJson())
+      console.log(getInformationAsJson());
       questions = await response.json();
 
       console.log("Pobrano pytania:", questions);
@@ -46,7 +50,6 @@ export default function DifficultyLevel() {
 
     setQuestionsFromApi(questions);
     setNewQuestionService();
-
 
     setLoadings(false);
     navigate("/game");
