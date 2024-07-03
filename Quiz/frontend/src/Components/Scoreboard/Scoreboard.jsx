@@ -11,7 +11,7 @@ export default function Scoreboard() {
   const [players, setPlayers] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [minLimit, setMinLimit] = useState(0);
-  const [limit, setLimit] = useState(10); // Initial limit, adjust as needed
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     fetchData();
@@ -40,7 +40,7 @@ export default function Scoreboard() {
   const handleSubmit = () => {
     if (categories.includes(inputValue)) {
       const filteredPlayers = players.filter(
-          (item) => item.categoryName === inputValue
+        (item) => item.categoryName === inputValue
       );
       setPlayers(filteredPlayers);
     } else {
@@ -53,39 +53,39 @@ export default function Scoreboard() {
   };
 
   return (
-      <div className="flex flex-col">
-        <Header/>
-        <div className="flex justify-center items-center h-2/3 flex-col space-y-4">
-          <div className="w-full flex justify-center">
-            <Input
-                className="w-48"
-                value={inputValue}
-                onChange={handleInputChange}
-            />
-            <Button onClick={handleSubmit} type="primary" className="ml-5">
-              Submit
-            </Button>
-            <Button onClick={handleResetData} className="ml-5">
-              Reset data
-            </Button>
-          </div>
-          <div className="w-3/4 border-8 rounded-sm flex">
-            <div className="w-full h-full text overflow-auto">
-              {players.slice(minLimit, data.length).map((item, index) => (
-                  <ScoreItem
-                      key={index}
-                      number={index + 1}
-                      playerName={item.playerName}
-                      categoryName={item.categoryName}
-                      totalPoints={item.totalPoints}
-                  />
-              ))}
-            </div>
-          </div>
-          <Link to="/">
-            <Button className="mt-5">Back to main menu</Button>
-          </Link>
+    <div className="flex flex-col">
+      <Header />
+      <div className="flex justify-center items-center h-2/3 flex-col space-y-4">
+        <div className="w-full flex justify-center h-auto">
+          <Input
+            className="w-48 h-8"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <Button onClick={handleSubmit} type="primary" className="ml-5">
+            Submit
+          </Button>
+          <Button onClick={handleResetData} className="ml-5">
+            Reset data
+          </Button>
         </div>
+        <div className="w-3/4 border-8 rounded-sm flex">
+          <div className="w-full h-full text overflow-auto">
+            {players.slice(minLimit, data.length).map((item, index) => (
+              <ScoreItem
+                key={index}
+                number={index + 1}
+                playerName={item.playerName}
+                categoryName={item.categoryName}
+                totalPoints={item.totalPoints}
+              />
+            ))}
+          </div>
+        </div>
+        <Link to="/">
+          <Button className="mt-5">Back to main menu</Button>
+        </Link>
       </div>
+    </div>
   );
 }
