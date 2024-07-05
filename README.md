@@ -11,6 +11,7 @@ Następnie wybieramy ilość pytań, dokonujemy wyboru kategorii oraz poziomu tr
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/417e087b-ea58-45b3-af83-f876611bf71f)
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/08be628c-f5a2-435d-85d6-e74db9bf0699)
 Po skonfigurowaniu rozgrywki podczas wciśnięcia przycisku start zostaje wysłane zapytanie do api o zwrot zestawu pytań skonfigurowanych przez użytkownika.
+
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/cbb47d72-b567-4806-80d9-4692aaaa3471)
 
 Następnie użytkownik zostaje przekierowany do okna rozgrywki gdzie wyświetlane są pytania, odpowiedzi oraz punkty uzyskane podczas rozgrywki
