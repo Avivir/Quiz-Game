@@ -12,6 +12,7 @@ Następnie wybieramy ilość pytań, dokonujemy wyboru kategorii oraz poziomu tr
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/08be628c-f5a2-435d-85d6-e74db9bf0699)
 Po skonfigurowaniu rozgrywki podczas wciśnięcia przycisku start zostaje wysłane zapytanie do api o zwrot zestawu pytań skonfigurowanych przez użytkownika.
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/cbb47d72-b567-4806-80d9-4692aaaa3471)
+
 Następnie użytkownik zostaje przekierowany do okna rozgrywki gdzie wyświetlane są pytania, odpowiedzi oraz punkty uzyskane podczas rozgrywki
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/9a35d84b-2c53-4f93-b278-273b4bc8058c)
 Użytkownik dostaje 10 sekun na udzielenie odpowiedzi. Poprawna odpowiedź jest sygnalizowana kolorem zielonym, błędna odpowiedź kolor czerwony. Każda poprawna odpowieź to +10 punktów do wyniku
