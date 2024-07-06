@@ -26,3 +26,9 @@ Użytkownik może równierz sprawdzić wyniki pozostałych graczy w zakładce sc
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/b653f66d-bd84-48b5-95e1-50957b6a41bb)
 Istnieje również możliwość filtracji po kategoriach aby sprawdzić który użytkownik sdobył najwięcej punktów.
 ![image](https://github.com/Avivir/Quiz-Game/assets/96440429/8b49e043-f87a-4c69-a1c6-a5a2d6fed9c7)
+
+Konfiguracja bazy SQL
+![Zrzut ekranu z 2024-07-06 08-08-04](https://github.com/Avivir/Quiz-Game/assets/68985756/0077d507-ef94-4f61-ac16-75d4a9ab849c)
+
+Konfiguracja App service
+![Zrzut ekranu z 2024-07-06 08-08-22](https://github.com/Avivir/Quiz-Game/assets/68985756/75429ad6-2b1a-41a2-b389-8086bd0fd3f4)
